@@ -10,3 +10,5 @@ Or at least 1 semi relistic scenario:
 - To actual stderr captured to a file (ideally on a fast FS nvme or ram disk - or maybe `> /dev/null`)
 
 Measure total time taken, and resource utilization (cpu seconds, peak memory)
+
+Obviously results are only valid on same hardware/comparing different logger (and interleaving tests etc)
