@@ -17,8 +17,9 @@ func userErrorf(format string, args ...interface{}) {
 }
 
 func main() {
-	numCallsFlag := flag.Int64("n", 100, "Number of calls logged (info level)")
+	numCallsFlag := flag.Int64("n", 100, "Number of calls logged (info level), per goroutine `r`")
 	numExtraFlag := flag.Int("e", 9, "Number of extra debug calls (not logged for each `n` iteration), total call will be n*(e+1)")
+	numGoroutineFlag := flag.Int("r", 10, "Number of go routines to use (multiplies the other numbers)")
 	// Force JSON output even on console and disable expensive debug file/line logging
 	// as well as goroutine id logging which most other loggers don't have.
 	cli.BeforeFlagParseHook = func() {
@@ -42,11 +43,17 @@ func main() {
 	}
 	numCalls := *numCallsFlag
 	numExtra := *numExtraFlag
-	log.S(log.Info, "Testing", log.Str("logger", cli.Command), log.Attr("num-calls", numCalls), log.Attr("num-extra", numExtra))
+	numThrds := *numGoroutineFlag
+	log.S(log.Info, "Testing",
+		log.Str("logger", cli.Command),
+		log.Attr("num-calls", numCalls),
+		log.Attr("num-extra", numExtra),
+		log.Attr("num-goroutines", numThrds),
+	)
 
 	switch cli.Command {
 	case "fortio":
-		FortioLog(numCalls, numExtra)
+		FortioLog(numThrds, numCalls, numExtra)
 	case "zap":
 		userErrorf("Zap test/bench not implemented yet")
 		// ZapLog()
