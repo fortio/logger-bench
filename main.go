@@ -62,8 +62,8 @@ func main() {
 		Drive(ZapLog1, numThrds, numCalls, numExtra)
 		_ = zlog.Sync()
 	case "slog":
-		// Drive(Slog1, numThrds, numCalls, numExtra)
-		userErrorf("slog test/bench not implemented yet")
+		SetupSlogLogger()
+		Drive(SlogLog1, numThrds, numCalls, numExtra)
 	}
 }
 

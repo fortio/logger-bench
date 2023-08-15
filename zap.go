@@ -31,7 +31,7 @@ func ZapLog1(id string, numLogged int64, numExtraNotLogged int) {
 				zap.String("id", id),
 				zap.Int64("iteration", i),
 				zap.Int("sub-iteration", j),
-				zap.String("logger", "fortio"),
+				zap.String("logger", "zaplog"),
 			)
 		}
 	}

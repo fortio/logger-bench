@@ -12,6 +12,9 @@ manual-check-fortio:
 manual-check-zap:
 	$(MAKE) manual-check-param PARAM=zap
 
+manual-check-slog:
+	$(MAKE) manual-check-param PARAM=slog
+
 manual-check-param:
 	@echo "--- Manual eyeball test for $(PARAM), should have 10 log entries (out of 50 made) ---"
 	go run . $(PARAM) $(ARGS) 2>&1
