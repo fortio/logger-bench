@@ -4,7 +4,7 @@
 ARGS:=-n 10 -e 4 -r 3
 
 
-manual-check: manual-check-fortio manual-check-zap
+manual-check: manual-check-fortio manual-check-zap manual-check-slog
 
 manual-check-fortio:
 	$(MAKE) manual-check-param PARAM=fortio
