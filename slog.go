@@ -14,7 +14,17 @@ func SetupSlogLogger() {
 	if log.GetLogLevel() == log.Debug {
 		level.Set(slog.LevelDebug)
 	}
-	slogger = slog.New(slog.NewJSONHandler(os.Stderr, &slog.HandlerOptions{Level: level}))
+	// Ouch... slog jsonhandler doesn't have a hook or config for configuring how is the timestamp being logged.
+	replace := func(groups []string, a slog.Attr) slog.Attr {
+		if len(groups) == 0 && a.Key == slog.TimeKey {
+			return slog.Attr{
+				Key:   slog.TimeKey,
+				Value: slog.Float64Value(log.TimeToTS(a.Value.Time())),
+			}
+		}
+		return a
+	}
+	slogger = slog.New(slog.NewJSONHandler(os.Stderr, &slog.HandlerOptions{Level: level, ReplaceAttr: replace}))
 }
 
 func SlogLog1(id string, numLogged int64, numExtraNotLogged int) {
