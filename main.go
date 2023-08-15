@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"runtime"
 
 	"fortio.org/cli"
 	"fortio.org/log"
@@ -49,6 +50,7 @@ func main() {
 		log.Attr("num-calls", numCalls),
 		log.Attr("num-extra", numExtra),
 		log.Attr("num-goroutines", numThrds),
+		log.Attr("gomaxprocs", runtime.GOMAXPROCS(0)),
 	)
 
 	switch cli.Command {

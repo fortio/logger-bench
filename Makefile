@@ -8,4 +8,4 @@ manual-check:
 	@echo "--- Manual eyeball test, should have 10 log entries (out of 50 made) ---"
 	go run . fortio $(ARGS) 2>&1 | jq -c
 	@echo "--- Manual eyeball test, should have all 50 entries - in color and with goroutine just for fun ---"
-	go run -race . fortio $(ARGS) -loglevel debug -logger-force-color=true -logger-goroutine=true
+	GOMAXPROCS=8 go run -race . fortio $(ARGS) -loglevel debug -logger-force-color=true -logger-goroutine=true
