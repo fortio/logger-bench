@@ -58,7 +58,9 @@ func main() {
 	case "fortio":
 		Drive(FortioLog1, numThrds, numCalls, numExtra)
 	case "zap":
+		SetupZapLogger()
 		Drive(ZapLog1, numThrds, numCalls, numExtra)
+		zlog.Sync()
 	case "slog":
 		// Drive(Slog1, numThrds, numCalls, numExtra)
 		userErrorf("slog test/bench not implemented yet")

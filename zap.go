@@ -5,17 +5,21 @@ import (
 	"go.uber.org/zap"
 )
 
-func ZapLog1(id string, numLogged int64, numExtraNotLogged int) {
+var zlog *zap.Logger
+
+func SetupZapLogger() {
 	cfg := zap.NewProductionConfig()
 	if log.GetLogLevel() == log.Debug {
 		cfg.Level.SetLevel(zap.DebugLevel)
 	}
-	logger, _ := cfg.Build(zap.WithCaller(false))
-	defer logger.Sync()
+	zlog, _ = cfg.Build(zap.WithCaller(false))
+}
+
+func ZapLog1(id string, numLogged int64, numExtraNotLogged int) {
 	// iterate numCalls time
 	for i := int64(1); i <= numLogged; i++ {
 		// Not optimized version - otherwise we can mutate the KeyVals
-		logger.Info("A visible log entry with 3 attributes",
+		zlog.Info("A visible log entry with 3 attributes",
 			zap.Int64("iteration", i),
 			zap.String("id", id),
 			zap.String("logger", "zaplog"), // same byte lentgh as `fortio`
@@ -23,7 +27,7 @@ func ZapLog1(id string, numLogged int64, numExtraNotLogged int) {
 		for j := 1; j <= numExtraNotLogged; j++ {
 			// Not optimized version - otherwise we'd check
 			// if log.LogDebug() {...}
-			logger.Debug("Not visible entry with 4 attributes",
+			zlog.Debug("Not visible entry with 4 attributes",
 				zap.String("id", id),
 				zap.Int64("iteration", i),
 				zap.Int("sub-iteration", j),
