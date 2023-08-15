@@ -42,6 +42,7 @@ func main() {
 	valid := []string{"fortio", "zap", "slog"}
 	cli.CommandBeforeFlags = true
 	cli.CommandHelp = "{" + cli.ColorJoin(log.Colors.Purple, valid...) + "}"
+	log.SetOutput(os.Stdout) // we use stderr for the logger tests, and so stdout for this
 	scli.ServerMain()
 	vSet := sets.FromSlice(valid)
 	if !vSet.Has(cli.Command) {
@@ -61,7 +62,6 @@ func main() {
 	)
 	switch cli.Command {
 	case "fortio":
-		log.SetOutput(os.Stderr)
 		Drive(*profileFlag, FortioLog1, numThrds, numCalls, numExtra)
 	case "zap":
 		SetupZapLogger()
@@ -101,6 +101,7 @@ func Drive(profile string, fn func(string, int64, int), numGoroutines int, numLo
 			log.Critf("Unable to start cpu profile: %v", err)
 		}
 	}
+	log.SetOutput(os.Stderr)
 	for i := 1; i <= numGoroutines; i++ {
 		go func(c int) {
 			fn(fmt.Sprintf("R%d", c), numLogged, numExtraNotLogged)
