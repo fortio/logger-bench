@@ -58,10 +58,9 @@ func main() {
 	case "fortio":
 		Drive(FortioLog1, numThrds, numCalls, numExtra)
 	case "zap":
-		userErrorf("Zap test/bench not implemented yet")
-		// ZapLog()
+		Drive(ZapLog1, numThrds, numCalls, numExtra)
 	case "slog":
-		// SLog()
+		// Drive(Slog1, numThrds, numCalls, numExtra)
 		userErrorf("slog test/bench not implemented yet")
 	}
 }
