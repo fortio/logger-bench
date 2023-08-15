@@ -1,9 +1,6 @@
 package main
 
 import (
-	"fmt"
-	"sync"
-
 	"fortio.org/log"
 )
 
@@ -27,17 +24,4 @@ func FortioLog1(id string, numLogged int64, numExtraNotLogged int) {
 			)
 		}
 	}
-}
-
-func FortioLog(numGoroutines int, numLogged int64, numExtraNotLogged int) {
-	// wait group
-	wg := sync.WaitGroup{}
-	wg.Add(numGoroutines)
-	for i := 1; i <= numGoroutines; i++ {
-		go func(c int) {
-			FortioLog1(fmt.Sprintf("R%d", c), numLogged, numExtraNotLogged)
-			wg.Done()
-		}(i)
-	}
-	wg.Wait()
 }

@@ -2,7 +2,9 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"runtime"
+	"sync"
 
 	"fortio.org/cli"
 	"fortio.org/log"
@@ -52,10 +54,9 @@ func main() {
 		log.Attr("num-goroutines", numThrds),
 		log.Attr("gomaxprocs", runtime.GOMAXPROCS(0)),
 	)
-
 	switch cli.Command {
 	case "fortio":
-		FortioLog(numThrds, numCalls, numExtra)
+		Drive(FortioLog1, numThrds, numCalls, numExtra)
 	case "zap":
 		userErrorf("Zap test/bench not implemented yet")
 		// ZapLog()
@@ -63,4 +64,18 @@ func main() {
 		// SLog()
 		userErrorf("slog test/bench not implemented yet")
 	}
+}
+
+// Drive the given (iteration logging) function from multiple goroutines.
+func Drive(fn func(string, int64, int), numGoroutines int, numLogged int64, numExtraNotLogged int) {
+	// wait group
+	wg := sync.WaitGroup{}
+	wg.Add(numGoroutines)
+	for i := 1; i <= numGoroutines; i++ {
+		go func(c int) {
+			fn(fmt.Sprintf("R%d", c), numLogged, numExtraNotLogged)
+			wg.Done()
+		}(i)
+	}
+	wg.Wait()
 }
