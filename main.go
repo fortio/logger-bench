@@ -25,7 +25,8 @@ func main() {
 	numCallsFlag := flag.Int64("n", 100, "Number of calls logged (info level), per goroutine `r`")
 	numExtraFlag := flag.Int("e", 9, "Number of extra debug calls (not logged for each `n` iteration), total call will be n*(e+1)")
 	numGoroutineFlag := flag.Int("r", 10, "Number of go routines to use (multiplies the other numbers)")
-	profileFlag := flag.String("profile", "", "Write a cpu and memory profile to using the given file `prefix`")
+	profileFlag := flag.String("profile", "",
+		"Write a cpu and memory profile to using the given file `prefix` (will add logger name .cpu and .mem)")
 	// Force JSON output even on console and disable expensive debug file/line logging
 	// as well as goroutine id logging which most other loggers don't have.
 	cli.BeforeFlagParseHook = func() {
@@ -51,25 +52,28 @@ func main() {
 	numCalls := *numCallsFlag
 	numExtra := *numExtraFlag
 	numThrds := *numGoroutineFlag
-	log.SetOutput(os.Stdout)
+	profile := ""
+	if *profileFlag != "" {
+		profile = *profileFlag + "-" + cli.Command
+	}
 	log.S(log.Info, "Testing",
 		log.Str("logger", cli.Command),
 		log.Attr("num-calls", numCalls),
 		log.Attr("num-extra", numExtra),
 		log.Attr("num-goroutines", numThrds),
 		log.Attr("gomaxprocs", runtime.GOMAXPROCS(0)),
-		log.Attr("profile", *profileFlag),
+		log.Attr("profile", profile),
 	)
 	switch cli.Command {
 	case "fortio":
-		Drive(*profileFlag, FortioLog1, numThrds, numCalls, numExtra)
+		Drive(profile, FortioLog1, numThrds, numCalls, numExtra)
 	case "zap":
 		SetupZapLogger()
-		Drive(*profileFlag, ZapLog1, numThrds, numCalls, numExtra)
+		Drive(profile, ZapLog1, numThrds, numCalls, numExtra)
 		_ = zlog.Sync()
 	case "slog":
 		SetupSlogLogger()
-		Drive(*profileFlag, SlogLog1, numThrds, numCalls, numExtra)
+		Drive(profile, SlogLog1, numThrds, numCalls, numExtra)
 	}
 }
 
@@ -122,7 +126,7 @@ func Drive(profile string, fn func(string, int64, int), numGoroutines int, numLo
 			log.Critf("Unable to write heap profile: %v", err)
 		}
 		fm.Close()
-		log.Infof("Wrote profile data to %s.{cpu|mem}", profile)
+		log.S(log.Info, "Wrote profile data", log.Str("cpu", profile+".cpu"), log.Str("mem", profile+".mem"))
 	}
 	PrintMemoryStats(&mStart, &mEnd)
 }
