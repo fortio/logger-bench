@@ -15,10 +15,11 @@ func SetupSlogLogger() {
 		level.Set(slog.LevelDebug)
 	}
 	// Ouch... slog jsonhandler doesn't have a hook or config for configuring how is the timestamp being logged.
+	// Makes it the same field name and format as both zap and fortio.
 	replace := func(groups []string, a slog.Attr) slog.Attr {
 		if len(groups) == 0 && a.Key == slog.TimeKey {
 			return slog.Attr{
-				Key:   slog.TimeKey,
+				Key:   "ts",
 				Value: slog.Float64Value(log.TimeToTS(a.Value.Time())),
 			}
 		}
