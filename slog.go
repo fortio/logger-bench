@@ -24,7 +24,7 @@ func SlogLog1(id string, numLogged int64, numExtraNotLogged int) {
 		slogger.Info("A visible log entry with 3 attributes",
 			slog.Any("iteration", i),
 			slog.String("id", id),
-			slog.String("logger", "zaplog"), // same byte lentgh as `fortio`
+			slog.String("logger", "sloggr"), // same byte lentgh as `fortio`
 		)
 		for j := 1; j <= numExtraNotLogged; j++ {
 			// Not optimized version - otherwise we'd check
@@ -33,7 +33,7 @@ func SlogLog1(id string, numLogged int64, numExtraNotLogged int) {
 				slog.String("id", id),
 				slog.Int64("iteration", i),
 				slog.Int("sub-iteration", j),
-				slog.String("logger", "fortio"),
+				slog.String("logger", "sloggr"),
 			)
 		}
 	}
