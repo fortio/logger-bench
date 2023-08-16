@@ -9,6 +9,8 @@ var zlog *zap.Logger
 
 func SetupZapLogger() {
 	cfg := zap.NewProductionConfig()
+	// Important: turn off sampling!
+	cfg.Sampling = nil
 	if log.GetLogLevel() == log.Debug {
 		cfg.Level.SetLevel(zap.DebugLevel)
 	}
