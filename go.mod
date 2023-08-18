@@ -4,12 +4,14 @@ go 1.20
 
 require (
 	fortio.org/cli v1.4.2
-	fortio.org/log v1.10.0
+	fortio.org/log v1.11.0
 	fortio.org/scli v1.11.0
 	fortio.org/sets v1.0.3
 	go.uber.org/zap v1.25.0
 	golang.org/x/exp v0.0.0-20230801115018-d63ba01acd4b
 )
+
+// replace fortio.org/log => ../log
 
 // replace fortio.org/cli => ../cli
 
