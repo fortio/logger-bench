@@ -3,8 +3,8 @@ module github.com/fortio/logger-bench
 go 1.20
 
 require (
-	fortio.org/cli v1.4.2
-	fortio.org/log v1.11.0
+	fortio.org/cli v1.5.0
+	fortio.org/log v1.12.0
 	fortio.org/scli v1.11.0
 	fortio.org/sets v1.0.3
 	go.uber.org/zap v1.25.0
@@ -17,7 +17,8 @@ require (
 
 require (
 	fortio.org/dflag v1.5.3 // indirect
-	fortio.org/version v1.0.2 // indirect
+	fortio.org/struct2env v0.4.0 // indirect
+	fortio.org/version v1.0.3 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	go.uber.org/multierr v1.10.0 // indirect
 	golang.org/x/sys v0.10.0 // indirect
