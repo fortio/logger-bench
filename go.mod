@@ -1,6 +1,6 @@
 module github.com/fortio/logger-bench
 
-go 1.21.4
+go 1.21
 
 require (
 	fortio.org/cli v1.5.1
