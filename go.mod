@@ -1,17 +1,16 @@
 module github.com/fortio/logger-bench
 
-go 1.21
+go 1.21.4
 
 require (
 	fortio.org/cli v1.5.1
 	fortio.org/log v1.12.0
-	fortio.org/scli v1.13.0
+	fortio.org/scli v1.13.1
 	fortio.org/sets v1.0.3
 	go.uber.org/zap v1.26.0
 )
 
 // replace fortio.org/log => ../log
-
 // replace fortio.org/cli => ../cli
 
 require (
