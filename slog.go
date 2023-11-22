@@ -3,8 +3,9 @@ package main
 import (
 	"os"
 
+	"log/slog"
+
 	"fortio.org/log"
-	"golang.org/x/exp/slog"
 )
 
 var slogger *slog.Logger
