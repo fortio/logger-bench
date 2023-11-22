@@ -1,9 +1,8 @@
 package main
 
 import (
-	"os"
-
 	"log/slog"
+	"os"
 
 	"fortio.org/log"
 )
