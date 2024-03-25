@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	fortio.org/cli v1.5.1
-	fortio.org/log v1.12.0
+	fortio.org/log v1.12.1
 	fortio.org/scli v1.14.1
 	fortio.org/sets v1.0.3
 	go.uber.org/zap v1.27.0
