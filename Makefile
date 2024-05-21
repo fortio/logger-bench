@@ -21,3 +21,9 @@ manual-check-param:
 	@echo "--- Manual eyeball test, should have all 50 entries - in color and with goroutine just for fun ---"
 	GOMAXPROCS=8 go run -race . $(PARAM) $(ARGS) -loglevel debug -logger-force-color=true -logger-goroutine=true
 	@echo "--- end of $(PARAM) manual check ---"
+
+.golangci.yml: Makefile
+	curl -fsS -o .golangci.yml https://raw.githubusercontent.com/fortio/workflows/main/golangci.yml
+
+lint: .golangci.yml
+	golangci-lint run
