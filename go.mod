@@ -6,7 +6,7 @@ require (
 	fortio.org/cli v1.5.2
 	fortio.org/log v1.12.2
 	fortio.org/scli v1.14.2
-	fortio.org/sets v1.0.4
+	fortio.org/sets v1.1.0
 	go.uber.org/zap v1.27.0
 )
 
