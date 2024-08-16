@@ -3,9 +3,9 @@ module github.com/fortio/logger-bench
 go 1.21
 
 require (
-	fortio.org/cli v1.8.0
+	fortio.org/cli v1.9.0
 	fortio.org/log v1.16.0
-	fortio.org/scli v1.15.1
+	fortio.org/scli v1.15.2
 	fortio.org/sets v1.2.0
 	go.uber.org/zap v1.27.0
 )
@@ -20,7 +20,7 @@ require (
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/kortschak/goroutine v1.1.2 // indirect
 	go.uber.org/multierr v1.10.0 // indirect
-	golang.org/x/crypto/x509roots/fallback v0.0.0-20240626151235-a6a393ffd658 // indirect
-	golang.org/x/exp v0.0.0-20240604190554-fc45aab8b7f8 // indirect
-	golang.org/x/sys v0.21.0 // indirect
+	golang.org/x/crypto/x509roots/fallback v0.0.0-20240806160748-b2d3a6a4b4d3 // indirect
+	golang.org/x/exp v0.0.0-20240808152545-0cdaa3abc0fa // indirect
+	golang.org/x/sys v0.24.0 // indirect
 )
