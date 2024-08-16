@@ -3,7 +3,7 @@ module github.com/fortio/logger-bench
 go 1.21
 
 require (
-	fortio.org/cli v1.8.0
+	fortio.org/cli v1.9.0
 	fortio.org/log v1.16.0
 	fortio.org/scli v1.15.1
 	fortio.org/sets v1.2.0
