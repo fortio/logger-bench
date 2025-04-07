@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	fortio.org/cli v1.9.2
-	fortio.org/log v1.17.1
+	fortio.org/log v1.17.2
 	fortio.org/scli v1.15.3
 	fortio.org/sets v1.2.0
 	go.uber.org/zap v1.27.0
@@ -15,7 +15,7 @@ require (
 
 require (
 	fortio.org/dflag v1.7.3 // indirect
-	fortio.org/struct2env v0.4.1 // indirect
+	fortio.org/struct2env v0.4.2 // indirect
 	fortio.org/version v1.0.4 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/kortschak/goroutine v1.1.2 // indirect
