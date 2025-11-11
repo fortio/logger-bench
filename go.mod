@@ -4,7 +4,7 @@ go 1.23.0
 
 require (
 	fortio.org/cli v1.12.2
-	fortio.org/log v1.18.2
+	fortio.org/log v1.18.3
 	fortio.org/scli v1.18.1
 	fortio.org/sets v1.3.0
 	go.uber.org/zap v1.27.0
