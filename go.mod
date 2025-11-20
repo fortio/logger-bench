@@ -7,7 +7,7 @@ require (
 	fortio.org/log v1.18.3
 	fortio.org/scli v1.19.0
 	fortio.org/sets v1.3.0
-	go.uber.org/zap v1.27.0
+	go.uber.org/zap v1.27.1
 )
 
 // replace fortio.org/log => ../log
